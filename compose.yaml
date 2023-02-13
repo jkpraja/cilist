@@ -15,7 +15,7 @@ services:
     networks:
       - appnet
     healthcheck:
-      test: ["CMD", "docker inspect --format '{{json .State.health.status}}' db | grep 'healthy' || exit 1"]
+      test: ["CMD-SHELL", "/usr/bin/mysql --user=people --password=people --execute \"SHOW DATABASES;\""]
       interval: 10s
       timeout: 30s
       retries: 10
@@ -37,9 +37,9 @@ services:
     #build: ./backend
     ports:
       - 5000:5000
-    #depends_on:
-    #  db:
-    #    condition: service_completed_successfully
+    depends_on:
+      db:
+        condition: service_healthy
     links:
       - db
     networks:
