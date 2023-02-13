@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: fe-configmap
-data:
-  backend-url: http://backend.c2loud.com
