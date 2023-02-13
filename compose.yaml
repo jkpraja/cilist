@@ -14,11 +14,11 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
     networks:
       - appnet
-    #healthcheck:
-    #  test: ["CMD", "curl"]
-    #  interval: 1m30s
-    #  timeout: 30s
-    #  retries: 5
+    healthcheck:
+      test: ["CMD", "docker inspect --format '{{json .State.health.status}}' db | grep 'healthy' || exit 1"]
+      interval: 10s
+      timeout: 30s
+      retries: 10
     #  start_period: 30s
     #command: ["bin/sh", "./entrypoint.sh"]
   frontend:
