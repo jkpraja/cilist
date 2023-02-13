@@ -1,6 +1,7 @@
 services:
   frontend:
-    image: frontend:1.1
+    container_name: cilist-fe
+    image: jkpraja/cilist-fe:${GIT_COMMIT_SHORT}
     build: ./frontend
     ports:
       - 80:3000
@@ -9,7 +10,8 @@ services:
     networks:
       - appnet
   backend:
-    image: backend:1.1
+    container_name: cilist-be
+    image: jkpraja/cilist-be:${GIT_COMMIT_SHORT}
     build: ./backend
     ports:
       - 5000:5000
@@ -18,8 +20,8 @@ services:
     networks:
       - appnet
   db:
-    image: db:1.1
-    #image: pesbukdb
+    container_name: cilist-db
+    image: jkpraja/cilist-db:${GIT_COMMIT_SHORT}
     build: ./database
     volumes:
       #- ./sosial-media/dump.sql:/etc/mysql/dump.sql
