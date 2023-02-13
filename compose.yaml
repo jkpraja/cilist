@@ -16,11 +16,11 @@ services:
     #  - 3306:3306
     networks:
       - appnet
-    #healthcheck:
-    #  test: ["CMD-SHELL", "/usr/bin/mysql --user=people --password=people --execute \"SHOW DATABASES;\""]
-    #  interval: 10s
-    #  timeout: 30s
-    #  retries: 10
+    healthcheck:
+      test: ["CMD-SHELL", "test -d "/var/lib/mysql/people"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     #  start_period: 30s
     #command: ["bin/sh", "./entrypoint.sh"]
   frontend:
