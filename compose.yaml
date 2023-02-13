@@ -1,24 +1,4 @@
 services:
-  frontend:
-    container_name: cilist-fe
-    image: jkpraja/cilist-fe:${GIT_COMMIT_SHORT}
-    build: ./frontend
-    ports:
-      - 80:3000
-    #volumes:
-    #  - sourcecode:/var/local/apache2/htdocs
-    networks:
-      - appnet
-  backend:
-    container_name: cilist-be
-    image: jkpraja/cilist-be:${GIT_COMMIT_SHORT}
-    build: ./backend
-    ports:
-      - 5000:5000
-    links:
-      - db
-    networks:
-      - appnet
   db:
     container_name: cilist-db
     image: jkpraja/cilist-db:${GIT_COMMIT_SHORT}
@@ -35,6 +15,28 @@ services:
     networks:
       - appnet
     #command: ["bin/sh", "./entrypoint.sh"]
+  frontend:
+    container_name: cilist-fe
+    image: jkpraja/cilist-fe:${GIT_COMMIT_SHORT}
+    build: ./frontend
+    ports:
+      - 80:3000
+    #volumes:
+    #  - sourcecode:/var/local/apache2/htdocs
+    networks:
+      - appnet
+  backend:
+    container_name: cilist-be
+    image: jkpraja/cilist-be:${GIT_COMMIT_SHORT}
+    build: ./backend
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - appnet
 volumes:
   db-data:
 networks:
