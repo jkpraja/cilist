@@ -1,7 +1,7 @@
 services:
   db:
     container_name: cilist-db
-    image: jkpraja/cilist-db:${GIT_COMMIT_SHORT}
+    image: jkpraja/cilist-db:latest
     build: ./database
     volumes:
       #- ./sosial-media/dump.sql:/etc/mysql/dump.sql
@@ -23,7 +23,7 @@ services:
     #command: ["bin/sh", "./entrypoint.sh"]
   frontend:
     container_name: cilist-fe
-    image: jkpraja/cilist-fe:${GIT_COMMIT_SHORT}
+    image: jkpraja/cilist-fe:latest
     build: ./frontend
     ports:
       - 80:3000
@@ -33,7 +33,7 @@ services:
       - appnet
   backend:
     container_name: cilist-be
-    image: jkpraja/cilist-be:${GIT_COMMIT_SHORT}
+    image: jkpraja/cilist-be:latest
     build: ./backend
     ports:
       - 5000:5000
