@@ -37,9 +37,9 @@ services:
     build: ./backend
     ports:
       - 5000:5000
-    depends_on:
-      db:
-        condition: service_completed_successfully
+    #depends_on:
+    #  db:
+    #    condition: service_completed_successfully
     links:
       - db
     networks:
