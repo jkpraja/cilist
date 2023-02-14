@@ -3,10 +3,10 @@ services:
     container_name: cilist-db
     image: jkpraja/cilist-db:${GIT_COMMIT_SHORT}
     #build: ./database
-    volumes:
+    #volumes:
       #- ./sosial-media/dump.sql:/etc/mysql/dump.sql
       #- ./database/crud_db.sql:/docker-entrypoint-initdb.d/crud_db.sql
-      - db-data:/var/lib/mysql
+      #- db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
@@ -47,7 +47,7 @@ services:
     #  - db
     networks:
       - appnet
-volumes:
-  db-data:
+#volumes:
+#  db-data:
 networks:
   appnet:
