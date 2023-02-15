@@ -1,0 +1,53 @@
+services:
+  db:
+    container_name: cilist-pipeline-db
+    image: jkpraja/cilist-pipeline-db:${GIT_COMMIT_SHORT}
+    #build: ./database
+    #volumes:
+      #- ./sosial-media/dump.sql:/etc/mysql/dump.sql
+      #- ./database/crud_db.sql:/docker-entrypoint-initdb.d/crud_db.sql
+      #- db-data:/var/lib/mysql
+    #environment:
+    #  - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #  - MYSQL_USER=${MYSQL_USER}
+    #  - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    #  - MYSQL_DATABASE=${MYSQL_DATABASE}
+    #ports:
+    #  - 3306:3306
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD-SHELL", "test -d '/var/lib/mysql/people'"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    #  start_period: 30s
+    #command: ["bin/sh", "./entrypoint.sh"]
+  frontend:
+    container_name: cilist-pipeline-fe
+    image: jkpraja/cilist-pipeline-fe:${GIT_COMMIT_SHORT}
+    #build: ./frontend
+    ports:
+      - 80:3000
+    #volumes:
+    #  - sourcecode:/var/local/apache2/htdocs
+    networks:
+      - appnet
+  backend:
+    container_name: cilist-pipeline-be
+    image: jkpraja/cilist-pipeline-be:${GIT_COMMIT_SHORT}
+    #build: ./backend
+    ports:
+      - 5000:5000
+    depends_on:
+      #- db
+      db:
+        condition: service_healthy
+    #links:
+    #  - db
+    networks:
+      - appnet
+#volumes:
+#  db-data:
+networks:
+  appnet:
