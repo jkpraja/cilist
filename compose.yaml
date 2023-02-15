@@ -7,11 +7,11 @@ services:
       #- ./sosial-media/dump.sql:/etc/mysql/dump.sql
       #- ./database/crud_db.sql:/docker-entrypoint-initdb.d/crud_db.sql
       #- db-data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    #environment:
+    #  - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #  - MYSQL_USER=${MYSQL_USER}
+    #  - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    #  - MYSQL_DATABASE=${MYSQL_DATABASE}
     #ports:
     #  - 3306:3306
     networks:
