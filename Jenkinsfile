@@ -31,6 +31,7 @@ pipeline {
                     sh 'docker tag cilist-pipeline-be:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-be:$GIT_COMMIT_SHORT'
                     sh 'docker tag cilist-pipeline-be:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-be:latest'
                     sh 'docker push jkpraja/cilist-pipeline-be:$GIT_COMMIT_SHORT'
+                    sh 'docker push jkpraja/cilist-pipeline-be:latest'
                 }
             }
         }
