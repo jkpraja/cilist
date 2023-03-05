@@ -1,17 +1,17 @@
 services:
   db:
     container_name: cilist-db
-    image: jkpraja/cilist-db:${GIT_COMMIT_SHORT}
+    image: jkpraja/cilist-db:latest
     #build: ./database
     #volumes:
       #- ./sosial-media/dump.sql:/etc/mysql/dump.sql
       #- ./database/crud_db.sql:/docker-entrypoint-initdb.d/crud_db.sql
       #- db-data:/var/lib/mysql
-    #environment:
-    #  - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    #  - MYSQL_USER=${MYSQL_USER}
-    #  - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    #  - MYSQL_DATABASE=${MYSQL_DATABASE}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     #ports:
     #  - 3306:3306
     networks:
@@ -25,7 +25,7 @@ services:
     #command: ["bin/sh", "./entrypoint.sh"]
   frontend:
     container_name: cilist-fe
-    image: jkpraja/cilist-fe:${GIT_COMMIT_SHORT}
+    image: jkpraja/cilist-fe:latest
     #build: ./frontend
     ports:
       - 80:3000
@@ -35,7 +35,7 @@ services:
       - appnet
   backend:
     container_name: cilist-be
-    image: jkpraja/cilist-be:${GIT_COMMIT_SHORT}
+    image: jkpraja/cilist-be:latest
     #build: ./backend
     ports:
       - 5000:5000

@@ -17,7 +17,9 @@ pipeline {
                 dir('database') {
                     sh 'docker build . -t cilist-pipeline-db:$GIT_COMMIT_SHORT'
                     sh 'docker tag cilist-pipeline-db:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-db:$GIT_COMMIT_SHORT'
+                    sh 'docker tag cilist-pipeline-db:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-db:latest'
                     sh 'docker push jkpraja/cilist-pipeline-db:$GIT_COMMIT_SHORT'
+                    sh 'docker push jkpraja/cilist-pipeline-db:latest'
                 }
             }
         }
@@ -27,6 +29,7 @@ pipeline {
                 dir('backend') {
                     sh 'docker build . -t cilist-pipeline-be:$GIT_COMMIT_SHORT'
                     sh 'docker tag cilist-pipeline-be:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-be:$GIT_COMMIT_SHORT'
+                    sh 'docker tag cilist-pipeline-be:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-be:latest'
                     sh 'docker push jkpraja/cilist-pipeline-be:$GIT_COMMIT_SHORT'
                 }
             }
@@ -37,7 +40,9 @@ pipeline {
                 dir('frontend') {
                     sh 'docker build . -t cilist-pipeline-fe:$GIT_COMMIT_SHORT'
                     sh 'docker tag cilist-pipeline-fe:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-fe:$GIT_COMMIT_SHORT'
+                    sh 'docker tag cilist-pipeline-fe:$GIT_COMMIT_SHORT jkpraja/cilist-pipeline-fe:latest'
                     sh 'docker push jkpraja/cilist-pipeline-fe:$GIT_COMMIT_SHORT'
+                    sh 'docker push jkpraja/cilist-pipeline-fe:latest'
                 }
             }
         }
